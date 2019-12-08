@@ -25,6 +25,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $response["user"]["email"]             = $user["email"];
         $response["user"]["nomor_hp"]          = $user["nomor_hp"];
         $response["user"]["alamat"]            = $user["alamat"];
+        $response["user"]["restore_id"]        = $user["restore_id"];
         echo json_encode($response);
     } else {
         // user tidak ditemukan password/email salah

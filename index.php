@@ -165,5 +165,6 @@ $app ->get('/kegiatan/{id}', function($request, $response, $args) use($app, $db)
 
     echo json_encode($responseJson); 
 });
+
 //run App
 $app->run();

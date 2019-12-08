@@ -41,6 +41,26 @@ class DB_Functions {
             return false;
         }
     }
+
+    public function updateUser($id_user, $restore_id) {
+        $stmt = $this->conn->prepare("UPDATE tb_user set restore_id=? WHERE id_user=?");
+        $stmt->bind_param("ss",$restore_id, $id_user);
+        $result = $stmt->execute();
+        $stmt->close();
+ 
+        // cek jika sudah sukses
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE id_user = ?");
+            $stmt->bind_param("s", $id_user);
+            $stmt->execute();
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+ 
+            return $user;
+        } else {
+            return false;
+        }
+    }
  
     /**
      * Get user berdasarkan email dan password
