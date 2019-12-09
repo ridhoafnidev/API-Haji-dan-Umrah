@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2019 at 06:36 AM
+-- Generation Time: Dec 09, 2019 at 09:27 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.2.24
 
@@ -142,16 +142,23 @@ CREATE TABLE `tb_user` (
   `password` varchar(255) NOT NULL,
   `salt` varchar(10) NOT NULL,
   `nomor_hp` int(50) NOT NULL,
-  `alamat` varchar(50) NOT NULL
+  `alamat` varchar(50) NOT NULL,
+  `restore_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `unique_id`, `username`, `nama_lengkap`, `email`, `password`, `salt`, `nomor_hp`, `alamat`) VALUES
-(12, '', 'admin', 'dewi', 'dewi@gmail.com', '123456', '', 9879, 'panam'),
-(13, '5dea489535fe25.50971293', 'username', 'username', 'user@gmail.com', 'Pwjkgy8cKsZNGwF3tK6GiPs2VWA1NTQ4NjM3YjRm', '5548637b4f', 822, 'alamat');
+INSERT INTO `tb_user` (`id_user`, `unique_id`, `username`, `nama_lengkap`, `email`, `password`, `salt`, `nomor_hp`, `alamat`, `restore_id`) VALUES
+(12, '', 'admin', 'dewi', 'dewi@gmail.com', '123456', '', 9879, 'panam', ''),
+(13, '5dea489535fe25.50971293', 'username', 'username', 'user@gmail.com', 'Pwjkgy8cKsZNGwF3tK6GiPs2VWA1NTQ4NjM3YjRm', '5548637b4f', 822, 'alamat', 'd22e76d8-eb42-4cb3-b4fa-cfaee468569e'),
+(14, '5dec99420d4d03.96547314', 'user2', 'User2', 'user2@gmail.com', '4tzEg+U/CdSLAvQ0lloTOzQuBmsyYmFlNTdhYzhl', '2bae57ac8e', 822, 'user2', 'f97e42eb-619c-4d9a-8b64-6599158b5345'),
+(18, '5decc6da868f59.06326110', 'user3', 'User3', 'user3@gmail.com', 'jCIJgHIo//UVmLyOddl+tQWQ+Io3YjAyZmQ2NDll', '7b02fd649e', 822, 'user3', '009a712e-a28f-4c20-a4ef-52522c54f988'),
+(19, '5dece3ff1c1bb4.75625419', 'user4', 'User4', 'user4@gmail.com', 'PLi+ULJAYKtTnjpWbtSkcYZKCPpiYzcxZTUyOWRi', 'bc71e529db', 822, 'user4', '8a22db8d-4429-4a8c-8c43-e13299deefca'),
+(20, '5dece4b9bce023.39188982', 'user5', 'User5', 'user5@gmail.com', 'tpFF+Cc+JYfFKSGc5niojP8jz/dlYTIyYzQyYWNk', 'ea22c42acd', 822, 'user5', '86bbb099-4fbb-44b8-abc8-d1d164b6a776'),
+(21, '5dece5d922f6d5.84077129', 'user6', 'User6', 'user6@gmail.com', 'BC+Ijs9nfuqRyTQeFu/RUOhxY/c2MzA4OGQ4Yzlm', '63088d8c9f', 822, 'user6', 'f7ae33c9-f040-41c5-bba6-bcf6bbb9493a'),
+(22, '5dece80f625602.22262913', 'user7', 'User7', 'user7@gmail.com', 'ykA2V3gpHVy/brJu6YYR6WCgSvgzZjlkMTJhZjRm', '3f9d12af4f', 822, 'user7', 'd22e76d8-eb42-4cb3-b4fa-cfaee468569e');
 
 --
 -- Indexes for dumped tables
@@ -231,7 +238,7 @@ ALTER TABLE `tb_materi`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
