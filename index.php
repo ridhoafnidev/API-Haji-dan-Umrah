@@ -102,7 +102,8 @@ $app ->get('/materi', function() use($app, $db){
             'id_materi' => $data['id_materi'],
             'jenis_materi' => $data['jenis_materi'],
             'judul_materi' => $data['judul_materi'],
-            'deksripsi_materi' => $data['deksripsi_materi']
+            'deskripsi_materi' => $data['deskripsi_materi'],
+            'link_youtube' => $data['link_youtube']
             );
         }
     }
