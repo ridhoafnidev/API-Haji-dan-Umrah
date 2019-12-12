@@ -8,7 +8,8 @@ $response = array("error" => FALSE);
  
 if (
     isset($_POST['username']) && 
-    isset($_POST['nama_lengkap']) && 
+    isset($_POST['nama_awal']) && 
+    isset($_POST['nama_akhir']) && 
     isset($_POST['email']) && 
     isset($_POST['password']) && 
     isset($_POST['nomor_hp']) && 
@@ -16,7 +17,8 @@ if (
  
     // menerima parameter POST ( nama, email, password )
     $username = $_POST['username'];
-    $nama = $_POST['nama_lengkap'];
+    $nama_awal = $_POST['nama_awal'];
+    $nama_akhir = $_POST['nama_akhir'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $nomor_hp = $_POST['nomor_hp'];
@@ -30,13 +32,14 @@ if (
         echo json_encode($response);
     } else {
         // buat user baru
-        $user = $db->simpanUser($username, $nama, $email, $password, $nomor_hp, $alamat);
+        $user = $db->simpanUser($username, $nama_awal, $nama_akhir, $email, $password, $nomor_hp, $alamat);
         if ($user) {
             // simpan user berhasil
             $response["error"] = FALSE;
             $response["uid"] = $user["unique_id"];
             $response["user"]["username"] = $user["username"];
-            $response["user"]["nama_lengkap"] = $user["nama_lengkap"];
+            $response["user"]["nama_awal"] = $user["nama_awal"];
+            $response["user"]["nama_akhir"] = $user["nama_akhir"];
             $response["user"]["email"] = $user["email"];
             $response["user"]["password"] = $user["password"];
             $response["user"]["nomor_hp"] = $user["nomor_hp"];

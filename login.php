@@ -21,7 +21,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $response["uid"]                       = $user["unique_id"];
         $response["user"]["id_user"]           = $user["id_user"];
         $response["user"]["username"]          = $user["username"];
-        $response["user"]["nama_lengkap"]      = $user["nama_lengkap"];
+        $response["user"]["nama_awal"]         = $user["nama_awal"];
+        $response["user"]["nama_akhir"]        = $user["nama_akhir"];
         $response["user"]["email"]             = $user["email"];
         $response["user"]["nomor_hp"]          = $user["nomor_hp"];
         $response["user"]["alamat"]            = $user["alamat"];

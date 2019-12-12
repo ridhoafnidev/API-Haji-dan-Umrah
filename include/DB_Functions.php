@@ -17,14 +17,14 @@ class DB_Functions {
          
     }
  
-    public function simpanUser($username, $nama_lengkap, $email, $password, $nomor_hp, $alamat) {
+    public function simpanUser($username, $nama_awal, $nama_akhir, $email, $password, $nomor_hp, $alamat) {
         $uuid = uniqid('', true);
         $hash = $this->hashSSHA($password);
         $pas = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"]; // salt
  
-        $stmt = $this->conn->prepare("INSERT INTO tb_user(unique_id, username, nama_lengkap, email, password, salt, nomor_hp, alamat) VALUES(?, ?, ?, ?, ?, ?, ?,?)");
-        $stmt->bind_param("ssssssss", $uuid, $username, $nama_lengkap, $email, $pas, $salt, $nomor_hp, $alamat);
+        $stmt = $this->conn->prepare("INSERT INTO tb_user(unique_id, username, nama_awal, nama_akhir, email, password, salt, nomor_hp, alamat) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssss", $uuid, $username, $nama_awal, $nama_akhir, $email, $pas, $salt, $nomor_hp, $alamat);
         $result = $stmt->execute();
         $stmt->close();
  

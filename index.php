@@ -133,6 +133,37 @@ $app ->get('/materi/{id}', function($request, $response, $args) use($app, $db){
     echo json_encode($responseJson); 
 });
 
+$app ->get('/user/{id}', function($request, $response, $args) use($app, $db){
+    $user = $db->tb_user()->where('id_user',$args['id']);
+    $detailuser = $user->fetch();
+
+    if ($user->count() == 0) {
+        $responseJson["error"] = true;
+        $responseJson["message"] = "Nama belum tersedia di database";
+        $responseJson["id_user"] = null;
+        $responseJson["username"] = null;
+        $responseJson["nama_awal"] = null;
+        $responseJson["nama_akhir"] = null;
+        $responseJson["email"] = null;
+        $responseJson["nomor_hp"] = null;
+        $responseJson["alamat"] = null;
+        $responseJson["restore_id"] = null;
+    } else {
+        $responseJson["error"] = false;
+        $responseJson["message"] = "Berhasil mengambil data";
+        $responseJson["id_user"] = $detailuser['id_user'];
+        $responseJson["username"] = $detailuser['username'];
+        $responseJson["nama_awal"] = $detailuser['nama_awal'];
+        $responseJson["nama_akhir"] = $detailuser['nama_akhir'];
+        $responseJson["email"] = $detailuser['email'];
+        $responseJson["nomor_hp"] = $detailuser['nomor_hp'];
+        $responseJson["alamat"] = $detailuser['alamat'];
+        $responseJson["restore_id"] = $detailuser['restore_id'];
+    }
+
+    echo json_encode($responseJson); 
+});
+
 $app ->get('/kegiatan', function() use($app, $db){
 	$kegiatan["error"] = false;
 	$kegiatan["message"] = "Berhasil mendapatkan data";
