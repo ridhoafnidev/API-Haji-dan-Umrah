@@ -110,27 +110,30 @@ $app ->get('/materi', function() use($app, $db){
     echo json_encode($responseJson);
 });
 
-$app ->get('/materi/{id}', function($request, $response, $args) use($app, $db){
-    $materi = $db->tb_doa()->where('id_doa',$args['id']);
-    $detailmateri = $materi->fetch();
+$app ->get('/kegiatan/{kloter}/{priode}', function($request, $response, $args) use($app, $db){
 
-    if ($doa->count() == 0) {
-        $responseJson["error"] = true;
-        $responseJson["message"] = "Nama belum tersedia di database";
-        $responseJson["id_materi"] = null;
-        $responseJson["jenis_doa"] = null;
-        $responseJson["judul_materi"] = null;
-        $responseJson["deskripsi_materi"] = null;
-    } else {
+    // $priode = $args['priode'];
+    // $kloter = $args['kloter'];
+    // $sql = "SELECT * FROM tb_kegiatan WHERE kloter=:kloter";
+    // $stmt = $db->prepare($sql);
+    // $stmt->execute([":kloter" => $kloter]);
+    // $kegiatan = $stmt->fetchAll();
+
+        $kegiatan = $db->tb_kegiatan()->where('kloter',$args['kloter'] AND 'priode',$args['priode']);
         $responseJson["error"] = false;
-        $responseJson["message"] = "Berhasil mengambil data";
-        $responseJson["id_materi"] = $detailmateri['id_materi'];
-        $responseJson["jenis_materi"] = $detailmateri['jenis_materi'];
-        $responseJson["judul_materi"] = $detailmateri['judul_materi'];
-        $responseJson["deskripsi_materi"] = $detailmateri['deskripsi_materi'];
-    }
-
-    echo json_encode($responseJson); 
+        $responseJson["message"] = "Berhasil mendapatkan data";
+        foreach($kegiatan as $data){
+        $responseJson['kegiatan'][] = array(
+            'id_kegiatan' => $data['id_kegiatan'],
+            'kloter' => $data['kloter'],
+            'priode' => $data['priode'],
+            'tanggal_keberangkatan' => $data['tanggal_keberangkatan'],
+            'tanggal_kepulangan' => $data['tanggal_kepulangan'],
+            'judul_kegiatan' => $data['judul_kegiatan'],
+            'deskripsi_kegiatan' => $data['deskripsi_kegiatan']
+            );
+        }
+    echo json_encode($responseJson);
 });
 
 $app ->get('/user/{id}', function($request, $response, $args) use($app, $db){
@@ -142,6 +145,8 @@ $app ->get('/user/{id}', function($request, $response, $args) use($app, $db){
         $responseJson["message"] = "Nama belum tersedia di database";
         $responseJson["id_user"] = null;
         $responseJson["username"] = null;
+        $responseJson["kloter"] = null;
+        $responseJson["priode"] = null;
         $responseJson["nama_awal"] = null;
         $responseJson["nama_akhir"] = null;
         $responseJson["email"] = null;
@@ -153,6 +158,8 @@ $app ->get('/user/{id}', function($request, $response, $args) use($app, $db){
         $responseJson["message"] = "Berhasil mengambil data";
         $responseJson["id_user"] = $detailuser['id_user'];
         $responseJson["username"] = $detailuser['username'];
+        $responseJson["priode"] = $detailuser['priode'];
+        $responseJson["kloter"] = $detailuser['kloter'];
         $responseJson["nama_awal"] = $detailuser['nama_awal'];
         $responseJson["nama_akhir"] = $detailuser['nama_akhir'];
         $responseJson["email"] = $detailuser['email'];
@@ -164,38 +171,27 @@ $app ->get('/user/{id}', function($request, $response, $args) use($app, $db){
     echo json_encode($responseJson); 
 });
 
-$app ->get('/kegiatan', function() use($app, $db){
-	$kegiatan["error"] = false;
-	$kegiatan["message"] = "Berhasil mendapatkan data";
-    foreach($db->tb_kegiatan() as $data){
-        $kegiatan['kegiatan'][] = array(
-            'id_kegiatan' => $data['id_kegiatan'],
-            'judul_kegiatan' => $data['judul_kegiatan'],
-            'deskripsi_kegiatan' => $data['deskripsi_kegiatan']
-            );
-    }
-    echo json_encode($kegiatan);
-});
-
-$app ->get('/kegiatan/{id}', function($request, $response, $args) use($app, $db){
-    $kegiatan = $db->tb_kegiatan()->where('id_kegiatan',$args['id']);
-    $kegiatandetail = $kegiatan->fetch();
-
-    if ($kegiatan->count() == 0) {
-        $responseJson["error"] = true;
-        $responseJson["message"] = "Nama belum tersedia di database";
-        $responseJson["id_kegiatan"] = null;
-        $responseJson["judul_kegiatan"] = null;
-        $responseJson["deskripsi_kegiatan"] = null;
-    } else {
-        $responseJson["error"] = false;
-        $responseJson["message"] = "Berhasil mengambil data";
-        $responseJson["id_kegiatan"] = $kegiatandetail['id_kegiatan'];
-        $responseJson["judul_kegiatan"] = $kegiatandetail['judul_kegiatan'];
-        $responseJson["deskripsi_kegiatan"] = $kegiatandetail['deskripsi_kegiatan'];
-    }
-
-    echo json_encode($responseJson); 
+$app->get('/kegiatans[/{params:.*}]', function ($request, $response, $args) use ($app, $db) {
+    $params = explode('/', $args['params']);
+    if ($db->tb_kegiatan()->where('priode=?', $params[0])->count() == 0) {
+            $responseJson["error"] = true;
+            $responseJson["message"] = "Belum mengambil data";
+        } else {
+            $responseJson["error"] = false;
+            $responseJson["message"] = "Berhasil mendapatkan data";
+            foreach($db->tb_kegiatan()->where('priode=?', $params[0])->and('kloter=?', $params[1]) as $data){
+            $responseJson['kegiatan'][] = array(
+                'id_kegiatan' => $data['id_kegiatan'],
+                'kloter' => $data['kloter'],
+                'priode' => $data['priode'],
+                'tanggal_keberangkatan' => $data['tanggal_keberangkatan'],
+                'tanggal_kepulangan' => $data['tanggal_kepulangan'],
+                'judul_kegiatan' => $data['judul_kegiatan'],
+                'deskripsi_kegiatan' => $data['deskripsi_kegiatan']
+                );
+            }
+        }
+        echo json_encode($responseJson); 
 });
 
 //run App

@@ -22,7 +22,10 @@ if (
             $response["error"] = FALSE;
             $response["user"]["id_user"] = $user["id_user"];
             $response["user"]["username"] = $user["username"];
-            $response["user"]["nama_lengkap"] = $user["nama_lengkap"];
+            $response["user"]["kloter"] = $user["kloter"];
+            $response["user"]["priode"] = $user["priode"];
+            $response["user"]["nama_awal"] = $user["nama_awal"];
+            $response["user"]["nama_akhir"] = $user["nama_akhir"];
             $response["user"]["email"] = $user["email"];
             $response["user"]["password"] = $user["password"];
             $response["user"]["nomor_hp"] = $user["nomor_hp"];

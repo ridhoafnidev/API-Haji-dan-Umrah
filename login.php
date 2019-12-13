@@ -19,9 +19,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // user ditemukan
         $response["error"] = FALSE;
         $response["uid"]                       = $user["unique_id"];
-        $response["kloter"]                    = $user["kloter"];
-        $response["priode"]                    = $user["priode"];
         $response["user"]["id_user"]           = $user["id_user"];
+        $response["user"]["priode"]            = $user["priode"];
+        $response["user"]["kloter"]            = $user["kloter"];
         $response["user"]["username"]          = $user["username"];
         $response["user"]["nama_awal"]         = $user["nama_awal"];
         $response["user"]["nama_akhir"]        = $user["nama_akhir"];

@@ -7,6 +7,8 @@ $db = new DB_Functions();
 $response = array("error" => FALSE);
  
 if (
+    isset($_POST['kloter']) && 
+    isset($_POST['priode']) && 
     isset($_POST['username']) && 
     isset($_POST['nama_awal']) && 
     isset($_POST['nama_akhir']) && 
@@ -16,6 +18,8 @@ if (
     isset($_POST['alamat'])) {
  
     // menerima parameter POST ( nama, email, password )
+    $kloter = $_POST['kloter'];
+    $priode = $_POST['priode'];
     $username = $_POST['username'];
     $nama_awal = $_POST['nama_awal'];
     $nama_akhir = $_POST['nama_akhir'];
@@ -32,11 +36,14 @@ if (
         echo json_encode($response);
     } else {
         // buat user baru
-        $user = $db->simpanUser($username, $nama_awal, $nama_akhir, $email, $password, $nomor_hp, $alamat);
+        $user = $db->simpanUser($kloter, $priode, $username, $nama_awal, $nama_akhir, $email, $password, $nomor_hp, $alamat);
         if ($user) {
             // simpan user berhasil
             $response["error"] = FALSE;
             $response["uid"] = $user["unique_id"];
+            $response["user"]["kloter"] = $user["kloter"];
+            $response["user"]["priode"] = $user["priode"];
+            $response["user"]["username"] = $user["username"];
             $response["user"]["username"] = $user["username"];
             $response["user"]["nama_awal"] = $user["nama_awal"];
             $response["user"]["nama_akhir"] = $user["nama_akhir"];
