@@ -1,6 +1,6 @@
 <?php
 define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASSWORD", "");
-define("DB_DATABASE", "db_haji_umrah");
+define("DB_USER", "n6171848_cikgood");
+define("DB_PASSWORD", "afrisal1995");
+define("DB_DATABASE", "n6171848_db_haji_umrah");
 ?>
