@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2019 at 09:27 AM
+-- Generation Time: Dec 14, 2019 at 04:26 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.2.24
 
@@ -66,7 +66,10 @@ CREATE TABLE `tb_doa` (
 --
 
 INSERT INTO `tb_doa` (`id_doa`, `judul_doa`, `gambar_doa`, `deskripsi_doa`) VALUES
-(4, 'yii2', 'lara.png', 'yii2');
+(4, 'Doa Setelah Shalat Sunat di Hijir Ismail', 'doa.jpg', 'Ya Allah, Engkaulah pemeliharaku, tiada Tuhan selain Engkau yang menjadikan daku. Aku ini hambaMu, memenuhi janji dan ikatan padaMu sejauh kemampuanku, sedapat mungkin aku berlindung kepadaMu dari kejahatan yang telah aku perbuat, aku kembali padaMu memba'),
+(5, 'Doa Sesudah Shalat Sunat Thawaf', 'doa2.jpg', 'Ya Allah, sesungguhnya Engkau Maha Mengetahui rahasiaku yang tersembunyi dan amal perbuatanku yang nyata, terimalah permohonanku, Engkau Maha Mengetahui hajatku, perkenankanlah harapanku. Ya Allah, tiada Tuhan selain Engkau, Maha Suci engkau dan Maha Terp'),
+(6, 'Doa di Multazam Setelah Tawaf', 'doa3.PNG', 'Ya Allah Tuhanku yang memelihara Ka’bah ini, merdekakanlah diri kami, bapak dan ibu kami, saudara-saudara dan anak-anak kami dari siksa neraka. Wahai Tuhan Yang Maha Pemurah, yang mempunyai keutamaan, kelebihan, anugerah dan kebaikan. Ya Allah Tuhanku ses'),
+(7, 'Doa Tawaf Putaran Ketujuh', 'haji90.png', 'Allahumma anta rabbi laa ilaaha illa anta khalaqtanii anaa ‘abduka wa anaa ‘alaa ‘ahdika wawa’dika mastatha’tu a’uudzubika min syarri maa shana’tu abuu ulaka bini’matika ‘alayya wa abuu ubidzambii faghfir lii fa innahuu laa yaghfirudzdzunuuba illaa anta. ');
 
 -- --------------------------------------------------------
 
@@ -76,6 +79,10 @@ INSERT INTO `tb_doa` (`id_doa`, `judul_doa`, `gambar_doa`, `deskripsi_doa`) VALU
 
 CREATE TABLE `tb_kegiatan` (
   `id_kegiatan` int(11) NOT NULL,
+  `kloter` int(11) NOT NULL,
+  `priode` int(11) NOT NULL,
+  `tanggal_keberangkatan` date NOT NULL,
+  `tanggal_kepulangan` date NOT NULL,
   `judul_kegiatan` varchar(50) NOT NULL,
   `deskripsi_kegiatan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -84,8 +91,12 @@ CREATE TABLE `tb_kegiatan` (
 -- Dumping data for table `tb_kegiatan`
 --
 
-INSERT INTO `tb_kegiatan` (`id_kegiatan`, `judul_kegiatan`, `deskripsi_kegiatan`) VALUES
-(4, 'judul', 'des');
+INSERT INTO `tb_kegiatan` (`id_kegiatan`, `kloter`, `priode`, `tanggal_keberangkatan`, `tanggal_kepulangan`, `judul_kegiatan`, `deskripsi_kegiatan`) VALUES
+(4, 1, 2019, '2019-12-13', '2019-12-31', 'judul', 'des'),
+(5, 1, 2019, '2019-12-13', '2019-12-31', 'uuu', 'iiiiiiiiiiiii'),
+(6, 2, 2019, '2019-12-31', '2020-01-31', 'piuhjk', 'fhgfhjh'),
+(7, 2, 2018, '2019-12-31', '2020-01-31', 'dkafjadf', 'fasdfa'),
+(8, 1, 2018, '2019-12-13', '2019-12-31', 'test 1', 'test 1');
 
 -- --------------------------------------------------------
 
@@ -104,7 +115,8 @@ CREATE TABLE `tb_larangan` (
 --
 
 INSERT INTO `tb_larangan` (`id_larangan`, `judul_larangan`, `deskripsi_larangan`) VALUES
-(1, 'tidak boleh membunuh binatang', 'diharamkan membunuh binatang');
+(1, 'tidak boleh membunuh binatang', 'diharamkan membunuh binatang'),
+(2, 'Larangan2', 'isi larangan2');
 
 -- --------------------------------------------------------
 
@@ -116,16 +128,18 @@ CREATE TABLE `tb_materi` (
   `id_materi` int(11) NOT NULL,
   `jenis_materi` varchar(50) NOT NULL,
   `judul_materi` varchar(50) NOT NULL,
-  `deskripsi_materi` varchar(225) NOT NULL
+  `deskripsi_materi` varchar(225) NOT NULL,
+  `link_youtube` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_materi`
 --
 
-INSERT INTO `tb_materi` (`id_materi`, `jenis_materi`, `judul_materi`, `deskripsi_materi`) VALUES
-(1, 'haji', 'umrah', 'blablabla'),
-(2, 'umrah', 'hajiumrah', 'bbkk');
+INSERT INTO `tb_materi` (`id_materi`, `jenis_materi`, `judul_materi`, `deskripsi_materi`, `link_youtube`) VALUES
+(1, 'umrah', 'Pengertian Dan Perbedaan Ibadah Haji Dan Umroh', 'Haji adalah berkunjung ketanah suci (ka’bah)) untuk melaksanakan amal ibadah tertentu sesuai dengan syarat, rukun, dan ketentuan yang telah ditetapkan oleh syara’. Haji diwajibkan bagi orang-orang islam yang sudah mampu atau ', 'https://www.youtube.com/watch?v=poooYDzgFFU'),
+(2, 'haji & umrah', 'Hukum Haji Dan Umrah', 'Ibadah haji dan umrah adalah suatu ibadah yang dikerjakan oleh umat Islam di tanah suci (Mekkah). Cara melakukan ibadah haji dan umroh tidak sama, karena memiliki perbedaan dari segi rukun umrah dan wajib umrah, terkadang mas', 'https://www.youtube.com/watch?v=oVwTWVPnchY'),
+(4, 'Umrah dan Haji', 'Judul', 'Materi describsi', 'https://www.youtube.com/watch?v=M1WwrLB1BK8');
 
 -- --------------------------------------------------------
 
@@ -136,8 +150,11 @@ INSERT INTO `tb_materi` (`id_materi`, `jenis_materi`, `judul_materi`, `deskripsi
 CREATE TABLE `tb_user` (
   `id_user` int(11) NOT NULL,
   `unique_id` varchar(23) NOT NULL,
+  `kloter` int(11) NOT NULL,
+  `priode` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `nama_lengkap` varchar(50) NOT NULL,
+  `nama_awal` varchar(50) NOT NULL,
+  `nama_akhir` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(10) NOT NULL,
@@ -150,15 +167,9 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `unique_id`, `username`, `nama_lengkap`, `email`, `password`, `salt`, `nomor_hp`, `alamat`, `restore_id`) VALUES
-(12, '', 'admin', 'dewi', 'dewi@gmail.com', '123456', '', 9879, 'panam', ''),
-(13, '5dea489535fe25.50971293', 'username', 'username', 'user@gmail.com', 'Pwjkgy8cKsZNGwF3tK6GiPs2VWA1NTQ4NjM3YjRm', '5548637b4f', 822, 'alamat', 'd22e76d8-eb42-4cb3-b4fa-cfaee468569e'),
-(14, '5dec99420d4d03.96547314', 'user2', 'User2', 'user2@gmail.com', '4tzEg+U/CdSLAvQ0lloTOzQuBmsyYmFlNTdhYzhl', '2bae57ac8e', 822, 'user2', 'f97e42eb-619c-4d9a-8b64-6599158b5345'),
-(18, '5decc6da868f59.06326110', 'user3', 'User3', 'user3@gmail.com', 'jCIJgHIo//UVmLyOddl+tQWQ+Io3YjAyZmQ2NDll', '7b02fd649e', 822, 'user3', '009a712e-a28f-4c20-a4ef-52522c54f988'),
-(19, '5dece3ff1c1bb4.75625419', 'user4', 'User4', 'user4@gmail.com', 'PLi+ULJAYKtTnjpWbtSkcYZKCPpiYzcxZTUyOWRi', 'bc71e529db', 822, 'user4', '8a22db8d-4429-4a8c-8c43-e13299deefca'),
-(20, '5dece4b9bce023.39188982', 'user5', 'User5', 'user5@gmail.com', 'tpFF+Cc+JYfFKSGc5niojP8jz/dlYTIyYzQyYWNk', 'ea22c42acd', 822, 'user5', '86bbb099-4fbb-44b8-abc8-d1d164b6a776'),
-(21, '5dece5d922f6d5.84077129', 'user6', 'User6', 'user6@gmail.com', 'BC+Ijs9nfuqRyTQeFu/RUOhxY/c2MzA4OGQ4Yzlm', '63088d8c9f', 822, 'user6', 'f7ae33c9-f040-41c5-bba6-bcf6bbb9493a'),
-(22, '5dece80f625602.22262913', 'user7', 'User7', 'user7@gmail.com', 'ykA2V3gpHVy/brJu6YYR6WCgSvgzZjlkMTJhZjRm', '3f9d12af4f', 822, 'user7', 'd22e76d8-eb42-4cb3-b4fa-cfaee468569e');
+INSERT INTO `tb_user` (`id_user`, `unique_id`, `kloter`, `priode`, `username`, `nama_awal`, `nama_akhir`, `email`, `password`, `salt`, `nomor_hp`, `alamat`, `restore_id`) VALUES
+(13, '5dea489535fe25.50971293', 1, 2019, 'username', 'Ahmad', 'Sutarman', 'user@gmail.com', 'Pwjkgy8cKsZNGwF3tK6GiPs2VWA1NTQ4NjM3YjRm', '5548637b4f', 822, 'alamat', '0036d859-cb9f-4c41-8f97-4c6eb2e763d4'),
+(29, '5df3d152035856.74244153', 1, 2019, 'amin', 'Amin', 'Alin', 'amin@gmail.com', 'QEuw5zOInp3hJ24yJeCxABYxMtQyZjQxNjc2ZWEy', '2f41676ea2', 822, 'pku', NULL);
 
 --
 -- Indexes for dumped tables
@@ -214,31 +225,31 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_doa`
 --
 ALTER TABLE `tb_doa`
-  MODIFY `id_doa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_doa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_larangan`
 --
 ALTER TABLE `tb_larangan`
-  MODIFY `id_larangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_larangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_materi`
 --
 ALTER TABLE `tb_materi`
-  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
